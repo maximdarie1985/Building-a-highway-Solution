@@ -46,11 +46,11 @@ public class GeneticAlgorithm {
 
             int offspring = random.nextInt(3);
 
-                for (int j = 0; j < offspring; j++) {
-                    int aux = population[i].getGene(j);
-                    population[i].setGene(j, population[i + 1].getGene(j));
-                    population[i + 1].setGene(j, aux);
-                }
+            for (int j = 0; j < offspring; j++) {
+                int aux = population[i].getGene(j);
+                population[i].setGene(j, population[i + 1].getGene(j));
+                population[i + 1].setGene(j, aux);
+            }
         }
         return population;
     }
@@ -65,6 +65,44 @@ public class GeneticAlgorithm {
             }
         }
         return population;
+    }
+
+    /*
+     * @param population
+     *          The population to apply mutation to
+     * @return The mutated population
+     */
+    public Individual[] mutatePopulation(Individual[] population) {
+        // Initialize new population
+        Individual[] newPopulation = initPopulation();
+
+        // Loop over current population by fitness
+        for (int populationIndex = 0; populationIndex < population.length; populationIndex++) {
+            population[populationIndex].getFitness();
+
+            // Loop over individual's genes
+            for (int geneIndex = 0; geneIndex < chromosomeSize; geneIndex++) {
+                // Skip mutation if this is an elite individual
+                if (populationIndex >= chromosomeSize) {
+                    // Does this gene need mutation?
+                    if (this.mutationRate > Math.random()) {
+                        // Get new gene
+                        int newGene = 1;
+                        if (population[populationIndex].getGene(geneIndex) == 1) {
+                            newGene = 0;
+                        }
+                        // Mutate gene
+                        population[populationIndex].setGene(geneIndex, newGene);
+                    }
+                }
+            }
+
+            // Add individual to population
+            population = newPopulation; //setIndividual(populationIndex, individual);
+        }
+
+        // Return mutated population
+        return newPopulation;
     }
 
     // Elitism Selection

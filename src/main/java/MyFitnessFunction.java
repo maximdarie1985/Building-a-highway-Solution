@@ -18,13 +18,13 @@ public class MyFitnessFunction {
     private int[][] matrix;
 
 
-    public MyFitnessFunction(String filename) throws FileNotFoundException{
+    public MyFitnessFunction(String filename) throws FileNotFoundException {
         super();
         Scanner in = new Scanner(new FileReader(filename));
         this.vertexCount = in.nextInt();
         this.matrix = new int[this.vertexCount][this.vertexCount];
-        for(int i=0;i<this.vertexCount;i++){
-            for(int j=0;j<this.vertexCount;j++){
+        for (int i = 0; i < this.vertexCount; i++) {
+            for (int j = 0; j < this.vertexCount; j++) {
                 this.matrix[i][j] = in.nextInt();
             }
         }
@@ -35,7 +35,6 @@ public class MyFitnessFunction {
     }
 
 
-
     public static void printLongInBin(long l, int last) {
         if (last > 0) {
             int p = (int) (l & 1);
@@ -44,23 +43,23 @@ public class MyFitnessFunction {
         }
     }
 
-    public static void generateRandomFile(String filename,int n) throws IOException{
+    public static void generateRandomFile(String filename, int n) throws IOException {
         Random random = new Random();
         BufferedWriter out = new BufferedWriter(new FileWriter(filename));
-        out.write(n+"\n");
+        out.write(n + "\n");
 
         int[][] matrix = new int[n][n];
 
-        for(int i=0;i<n-1;i++){
-            for(int j=i+1;j<n;j++){
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
                 matrix[i][j] = random.nextInt(256);
                 matrix[j][i] = matrix[i][j];
             }
         }
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                out.write(matrix[i][j]+" ");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                out.write(matrix[i][j] + " ");
             }
             out.write("\n");
         }

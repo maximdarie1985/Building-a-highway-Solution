@@ -11,7 +11,7 @@ public class Controller {
         final int chromosomeLength = 3;                            // chromosome length (p1,p2,p3)
         final double crossoverRate = 0.70;                          // crossover rate
         final double mutationRate = (double) 1 / populationSize;    // mutation rate
-        final int numberOfGeneration = 5;                           // # of generations
+        final int numberOfGeneration = 6;                           // # of generations
 
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(populationSize, chromosomeLength, crossoverRate, mutationRate);
 
@@ -40,20 +40,21 @@ public class Controller {
             // Crossover children fitness evaluation
             geneticAlgorithm.evaluatePopulation(population);
 
-            // To do - implement MUTATIE MEDIATA
-            population = geneticAlgorithm.mutate(population);
+            // Apply mutation to population
+            population = geneticAlgorithm.mutatePopulation(population);
 
             // Post-mutation population fitness evaluation
-            //geneticAlgorithm.printPopulation(population);
-            //geneticAlgorithm.printFitness(population);
+            geneticAlgorithm.evaluatePopulation(population);
+            geneticAlgorithm.printFitness(population);
 
             generation++;
 
             if (geneticAlgorithm.bestFitness(population) == chromosomeLength) {
+                geneticAlgorithm.printPopulation(population);
                 break;
             }
 
-            MyFitnessFunction.printLongInBin(1000,10);
+            MyFitnessFunction.printLongInBin(1000, 10);
         }
     }
 }
