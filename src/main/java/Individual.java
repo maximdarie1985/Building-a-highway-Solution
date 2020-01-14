@@ -16,19 +16,23 @@ public class Individual {
     }
 
     public int[] getChromosome() {
+
         return chromosome;
     }
 
     public int getFitness() {
+
         return fitness;
     }
 
     public void setFitness(int fitness) {
+
         this.fitness = fitness;
     }
 
     // Initializes individual
     public Individual() {
+
         this.chromosome = new int[3];
     }
 
@@ -41,18 +45,15 @@ public class Individual {
     }
 
     public void evaluate() {
-        int p1 =chromosome[0];
+        int p1 = chromosome[0];
         int p2 = chromosome[1];
         int p3 = chromosome[2];
 
-        if(p1 <= 4 && p2 <= 30){
+        if (p1 <= 4 && p2 <= 30) {
             setFitness((2 * p1 * p2 - p2) / p1 * p3);
-        }
-
-        else if( p2 < 50){
+        } else if (p2 < 50) {
             setFitness((3 * p1 * p2 + 200) / (2 * p2) * p3);
-        }
-        else{
+        } else {
             setFitness((3 * p1 * p1 * p2 - 5 * p2 + 1000) / (p2 * p2) * p3);
         }
     }
